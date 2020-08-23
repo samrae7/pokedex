@@ -21,8 +21,8 @@ export default function Pokedex() {
 
   return (
     <>
-      <h1>My Pokedex</h1>
-      <ul>
+      <h1 className="pokedex-heading">My Pokedex</h1>
+      <ul className="pokedex-list">
         {pokemon.map((poke, i) => (
           <li key={`poke-${i}`}>{poke.name}</li>
         ))}
