@@ -9,15 +9,19 @@ export default function PokemonDetails(props) {
   if (!res.response) {
     return <div>Loading...</div>;
   }
-  const details = res.response;
+  const { types } = res.response;
   const nameCapitalized = name.charAt(0).toUpperCase() + name.slice(1);
   return (
     <>
       <h1>{nameCapitalized}</h1>
       <p>
-        Types:
-        {details.types.map((type) => (
-          <span key={type.type.name}>{type.type.name}</span>
+        <span>Types: </span>
+        {types.map((type, i) => (
+          <span key={type.type.name}>
+            {type.type.name}
+            {i < types.length - 1 ? "," : ""}
+            <span> </span>
+          </span>
         ))}
       </p>
     </>
