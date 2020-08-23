@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen, act } from "@testing-library/react";
-import Pokedex from "./Pokedex";
+import Pokedex from ".";
 
 describe("Pokedex", () => {
   afterAll(() => {

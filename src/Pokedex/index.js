@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 export default function Pokedex() {
   const [pokemon, setPokemon] = useState([]);
 
+  // TODO loading state
+
   useEffect(() => {
     async function fetchPokemon() {
       try {
