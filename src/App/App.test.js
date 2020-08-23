@@ -8,12 +8,17 @@ describe("Pokedex", () => {
   });
 
   beforeAll(() => {
-    fetch.mockResponse(
+    fetch.mockResponseOnce(
       JSON.stringify({
         results: [
           { name: "bulbasaur", url: "acme.co.nz" },
           { name: "ivysaur", url: "acme.co.nz" },
         ],
+      })
+    );
+    fetch.mockResponseOnce(
+      JSON.stringify({
+        types: [{ type: { name: "fire" } }, { type: { name: "water" } }],
       })
     );
   });
@@ -27,14 +32,14 @@ describe("Pokedex", () => {
     expect(window.location.pathname).toEqual("/");
     const pokemonLink = await screen.findByText("bulbasaur");
 
-    // when the uset clicks a pokemon link
+    // when the user clicks a pokemon link
     act(() => {
       fireEvent.click(pokemonLink);
     });
 
     // then they are taken to the pokemon detail page
     expect(window.location.pathname).toEqual("/bulbasaur");
-    const heading = screen.getByRole("heading");
+    const heading = await screen.findByRole("heading");
     expect(heading).toBeInTheDocument();
     const { getByText } = within(heading);
     expect(getByText("Bulbasaur")).toBeInTheDocument();

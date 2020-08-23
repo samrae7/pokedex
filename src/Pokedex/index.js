@@ -1,25 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
+import { useFetchPokemonList } from "../pokemonHooks";
 
 export default function Pokedex() {
-  const [pokemon, setPokemon] = useState([]);
+  // TODO error state
 
-  // TODO loading state
+  const res = useFetchPokemonList();
 
-  useEffect(() => {
-    async function fetchPokemon() {
-      try {
-        const response = await fetch(
-          "https://pokeapi.co/api/v2/pokemon?limit=150"
-        );
-        const { results } = await response.json();
-        setPokemon(results);
-      } catch {
-        return null;
-      }
-    }
-    fetchPokemon();
-  }, []);
+  // TODO add test for loading
+  if (!res.response) {
+    return <div>Loading...</div>;
+  }
+
+  const pokemon = res.response.results;
 
   return (
     <>
@@ -27,7 +20,9 @@ export default function Pokedex() {
       <ul className="pokedex-list">
         {pokemon.map((poke, i) => (
           <li key={`poke-${i}`}>
-            <Link to={poke.name}>{poke.name}</Link>
+            <Link to={{pathname: poke.name, state: { url: poke.url } }}>
+              {poke.name}
+            </Link>
           </li>
         ))}
       </ul>
