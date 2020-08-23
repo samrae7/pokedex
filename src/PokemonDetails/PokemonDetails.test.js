@@ -32,7 +32,7 @@ describe("PokemonDetails", () => {
 
   it("should fetch and display Pokemon types", async () => {
     expect(await screen.findByText("Foomon")).toBeInTheDocument();
-    expect(await screen.findByText("fire")).toBeInTheDocument();
+    expect(await screen.findByText("fire,")).toBeInTheDocument();
     expect(await screen.findByText("water")).toBeInTheDocument();
   });
 });
