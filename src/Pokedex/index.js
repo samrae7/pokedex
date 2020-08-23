@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 export default function Pokedex() {
   const [pokemon, setPokemon] = useState([]);
@@ -26,7 +27,9 @@ export default function Pokedex() {
       <h1 className="pokedex-heading">My Pokedex</h1>
       <ul className="pokedex-list">
         {pokemon.map((poke, i) => (
-          <li key={`poke-${i}`}>{poke.name}</li>
+          <li key={`poke-${i}`}>
+            <Link to={poke.name}>{poke.name}</Link>
+          </li>
         ))}
       </ul>
     </>

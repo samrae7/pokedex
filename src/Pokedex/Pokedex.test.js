@@ -1,6 +1,7 @@
 import React from "react";
-import { render, screen, act } from "@testing-library/react";
+import { render, screen, act, fireEvent, debug } from "@testing-library/react";
 import Pokedex from ".";
+import { BrowserRouter as Router } from "react-router-dom";
 
 describe("Pokedex", () => {
   afterAll(() => {
@@ -18,19 +19,30 @@ describe("Pokedex", () => {
     );
   });
 
+  beforeEach(() => {
+    render(
+      <Router>
+        <Pokedex />
+      </Router>
+    );
+  });
+
   it("should display the correct heading", async () => {
-    act(() => {
-      render(<Pokedex />);
-    });
     expect(await screen.findByText("My Pokedex")).toBeInTheDocument();
   });
 
   it("should display a list of Pokemon", async () => {
-    act(() => {
-      render(<Pokedex />);
-    });
     expect(await screen.findAllByRole("listitem")).toHaveLength(2);
     expect(await screen.findByText("bulbasaur")).toBeInTheDocument();
     expect(await screen.findByText("ivysaur")).toBeInTheDocument();
+  });
+
+  it("should take you to the details page when you click one of the pokemon", async () => {
+    expect(window.location.pathname).toEqual("/");
+    const pokemonLink = await screen.findByText("bulbasaur");
+    act(() => {
+      fireEvent.click(pokemonLink);
+    });
+    expect(window.location.pathname).toEqual("/bulbasaur");
   });
 });
