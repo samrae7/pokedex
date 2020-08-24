@@ -1,7 +1,9 @@
 # Pokedex
-Very  simple react app querying the Pokemon API.
+
+Very simple react app querying the Pokemon API.
 
 ## Running the project
+
 NB: assumes you have `node` and `npm` installed globally
 
 - git clone this project
@@ -9,15 +11,21 @@ NB: assumes you have `node` and `npm` installed globally
 - run `npm start` and go to `http://localhost:3000` in your browser
 - You should see a list of pokemon. Click on one and see details for that pokemon.
 
+## Running tests
+
+- Run `npm test` from the root directory
+
 ## Libraries used
+
 - create-react-app
 - react-router
 - react-testing-library for testing
 
 ## Cool features
+
 - Custom hook for fetching data ( see `/pokemonHooks`)
 
-
+# Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
