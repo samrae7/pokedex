@@ -1,5 +1,11 @@
 import React from "react";
-import { render, screen, act, fireEvent, debug } from "@testing-library/react";
+import {
+  render,
+  screen,
+  act,
+  fireEvent,
+  waitForElement,
+} from "@testing-library/react";
 import Pokedex from ".";
 import { BrowserRouter as Router } from "react-router-dom";
 
@@ -44,5 +50,17 @@ describe("Pokedex", () => {
       fireEvent.click(pokemonLink);
     });
     expect(window.location.pathname).toEqual("/bulbasaur");
+  });
+});
+
+describe("Pokedex loading state", () => {
+  it("should display the loading state", async () => {
+    const screen = await render(
+      <Router>
+        <Pokedex />
+      </Router>
+    );
+    const loading = await waitForElement(() => screen.getByText("Loading..."));
+    expect(loading).toBeInTheDocument();
   });
 });
